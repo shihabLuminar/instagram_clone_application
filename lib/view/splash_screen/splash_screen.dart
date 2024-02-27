@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone_application/core/constants/image_constants.dart';
 import 'package:instagram_clone_application/view/select_account_screen/select_account_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -26,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Center(
         child: Image.asset(
-          "assets/images/app_icon.png",
+          ImageConstants.appIconPng,
           scale: 1.5,
         ),
       ),
