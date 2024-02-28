@@ -1,10 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:instagram_clone_application/core/constants/color_constants.dart';
 import 'package:instagram_clone_application/core/constants/image_constants.dart';
 import 'package:instagram_clone_application/global_widgets/custom_button.dart';
+import 'package:instagram_clone_application/view/login_screen/login_screen.dart';
 
 class SelectAccountScreen extends StatelessWidget {
   const SelectAccountScreen({super.key});
@@ -34,7 +35,11 @@ class SelectAccountScreen extends StatelessWidget {
               CustomButton(
                 text: "Log in",
                 onTap: () {
-                  print("my custom button pressed");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginScreen(),
+                      ));
                 },
               ),
               SizedBox(height: 30),
