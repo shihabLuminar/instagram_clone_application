@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone_application/view/home_screen/home_screen.dart';
 import 'package:instagram_clone_application/view/select_account_screen/select_account_screen.dart';
 
 class BottomNavBarScreen extends StatefulWidget {
@@ -10,9 +11,7 @@ class BottomNavBarScreen extends StatefulWidget {
 
 class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
   List<Widget> screesList = [
-    Container(
-      color: Colors.red,
-    ),
+    HomeScreen(),
     Container(
       color: Colors.yellow,
     ),
