@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:instagram_clone_application/core/constants/image_constants.dart';
 import 'package:instagram_clone_application/dummy_db.dart';
+import 'package:instagram_clone_application/view/home_screen/widgets/custom_posts_container.dart';
 import 'package:instagram_clone_application/view/home_screen/widgets/custom_story_avatar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -37,7 +38,8 @@ class HomeScreen extends StatelessWidget {
                           isLive: DummyDb.storyList[index]["isLive"],
                         )),
               ),
-            )
+            ),
+            CustomPostsContainer()
           ],
         ));
   }
