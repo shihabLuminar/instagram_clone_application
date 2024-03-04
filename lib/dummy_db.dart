@@ -43,4 +43,35 @@ class DummyDb {
       "isLive": false,
     },
   ];
+
+  static const List<Map<String, dynamic>> homePostsList = [
+    {
+      "userName": "shihab",
+      "proPic":
+          "https://images.pexels.com/photos/712513/pexels-photo-712513.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "location": "Ernakulam, kerala",
+      "posts": [
+        "https://images.pexels.com/photos/20301196/pexels-photo-20301196/free-photo-of-boat-on-lake.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "https://images.pexels.com/photos/9866472/pexels-photo-9866472.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+        "https://images.pexels.com/photos/14860614/pexels-photo-14860614.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
+      ],
+      "liked": true,
+      "caption":
+          "um is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the "
+    },
+    {
+      "userName": "Anand",
+      "proPic":
+          "https://images.pexels.com/photos/712513/pexels-photo-712513.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "location": "Ernakulam, kerala",
+      "posts": [
+        "https://images.pexels.com/photos/372042/pexels-photo-372042.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+        "https://images.pexels.com/photos/9866472/pexels-photo-9866472.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+        "https://images.pexels.com/photos/14860614/pexels-photo-14860614.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
+      ],
+      "liked": false,
+      "caption":
+          "um is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the "
+    },
+  ];
 }

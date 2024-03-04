@@ -5,19 +5,28 @@ import 'package:flutter/widgets.dart';
 import 'package:instagram_clone_application/core/constants/color_constants.dart';
 
 class CustomPostsContainer extends StatefulWidget {
-  const CustomPostsContainer({super.key});
+  const CustomPostsContainer({
+    super.key,
+    required this.userName,
+    required this.proPic,
+    required this.location,
+    required this.postImagesList,
+    this.isLiked = false,
+    this.caption,
+  });
+
+  final String userName;
+  final String proPic;
+  final String location;
+  final List<String> postImagesList;
+  final bool isLiked;
+  final String? caption;
 
   @override
   State<CustomPostsContainer> createState() => _CustomPostsContainerState();
 }
 
 class _CustomPostsContainerState extends State<CustomPostsContainer> {
-  List<String> postImagesList = [
-    "https://images.pexels.com/photos/20301196/pexels-photo-20301196/free-photo-of-boat-on-lake.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/9866472/pexels-photo-9866472.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-    "https://images.pexels.com/photos/14860614/pexels-photo-14860614.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
-  ];
-
   int currentPage = 1;
   @override
   Widget build(BuildContext context) {
@@ -29,13 +38,12 @@ class _CustomPostsContainerState extends State<CustomPostsContainer> {
           ListTile(
             leading: CircleAvatar(
               radius: 16,
-              backgroundImage: NetworkImage(
-                  "https://images.pexels.com/photos/834863/pexels-photo-834863.jpeg?auto=compress&cs=tinysrgb&w=600"),
+              backgroundImage: NetworkImage(widget.proPic),
             ),
             title: Row(
               children: [
                 Text(
-                  "joshual_l",
+                  widget.userName,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
                 ),
                 SizedBox(width: 10),
@@ -47,7 +55,7 @@ class _CustomPostsContainerState extends State<CustomPostsContainer> {
               ],
             ),
             subtitle: Text(
-              "Tokyo, Japan",
+              widget.location,
               style: TextStyle(fontWeight: FontWeight.normal, fontSize: 11),
             ),
             trailing: Icon(Icons.more_horiz),
@@ -61,12 +69,12 @@ class _CustomPostsContainerState extends State<CustomPostsContainer> {
                     currentPage = value + 1;
                     setState(() {});
                   },
-                  itemCount: postImagesList.length,
+                  itemCount: widget.postImagesList.length,
                   itemBuilder: (context, index) => Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: NetworkImage(postImagesList[index]))),
+                            image: NetworkImage(widget.postImagesList[index]))),
                   ),
                 ),
               ),
@@ -79,7 +87,7 @@ class _CustomPostsContainerState extends State<CustomPostsContainer> {
                       borderRadius: BorderRadius.circular(15)),
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   child: Text(
-                    "$currentPage/${postImagesList.length}",
+                    "$currentPage/${widget.postImagesList.length}",
                     style: TextStyle(color: ColorConstants.primaryWhite),
                   ),
                 ),
@@ -88,36 +96,103 @@ class _CustomPostsContainerState extends State<CustomPostsContainer> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13.5),
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    Icon(Icons.favorite_border, size: 25),
-                    SizedBox(width: 16),
-                    Icon(Icons.maps_ugc_rounded, size: 25),
-                    SizedBox(width: 16),
-                    Icon(Icons.send, size: 25),
+                    Row(
+                      children: [
+                        widget.isLiked == true
+                            ? Icon(
+                                Icons.favorite_rounded,
+                                size: 25,
+                                color: ColorConstants.normalRed,
+                              )
+                            : Icon(Icons.favorite_border, size: 25),
+                        SizedBox(width: 16),
+                        Icon(Icons.maps_ugc_rounded, size: 25),
+                        SizedBox(width: 16),
+                        Icon(Icons.send, size: 25),
+                      ],
+                    ),
+                    Expanded(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(
+                          widget.postImagesList.length,
+                          (index) => Padding(
+                                padding: const EdgeInsets.only(left: 3),
+                                child: CircleAvatar(
+                                  backgroundColor: (index == currentPage - 1)
+                                      ? ColorConstants.primaryBlue
+                                      : Colors.grey.withOpacity(.3),
+                                  radius: (index == currentPage - 1) ? 5 : 3,
+                                ),
+                              )),
+                    )),
+                    Icon(Icons.bookmark_border, size: 25),
                   ],
                 ),
-                Expanded(
-                    child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(
-                      postImagesList.length,
-                      (index) => Padding(
-                            padding: const EdgeInsets.only(left: 3),
-                            child: CircleAvatar(
-                              backgroundColor: (index == currentPage - 1)
-                                  ? ColorConstants.primaryBlue
-                                  : ColorConstants.customPink,
-                              radius: (index == currentPage - 1) ? 5 : 3,
-                            ),
-                          )),
-                )),
-                Icon(Icons.bookmark_border, size: 25),
+                SizedBox(
+                  height: 13.5,
+                ),
+                Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(widget.proPic),
+                      radius: 10,
+                    ),
+                    SizedBox(width: 16),
+                    RichText(
+                        text: TextSpan(
+                            text: "Liked by ",
+                            style:
+                                TextStyle(color: ColorConstants.primaryBlack),
+                            children: [
+                          TextSpan(
+                            text: "user_name ",
+                            style: TextStyle(
+                                color: ColorConstants.primaryBlack,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          TextSpan(text: "and "),
+                          TextSpan(
+                            text: "56,789 others ",
+                            style: TextStyle(
+                                color: ColorConstants.primaryBlack,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ])),
+                  ],
+                ),
+                SizedBox(height: 13.5),
+                RichText(
+                    textAlign: TextAlign.justify,
+                    text: TextSpan(
+                        text: widget.userName,
+                        style: TextStyle(
+                            color: ColorConstants.primaryBlack,
+                            fontWeight: FontWeight.bold),
+                        children: [
+                          TextSpan(
+                            text: " ${widget.caption}" ?? "",
+                            style: TextStyle(
+                                color: ColorConstants.primaryBlack,
+                                fontWeight: FontWeight.normal),
+                          )
+                        ])),
+                SizedBox(height: 13.5),
+                Text(
+                  "September 18",
+                  style: TextStyle(
+                      color: ColorConstants.primaryBlack.withOpacity(.5),
+                      fontSize: 11,
+                      fontWeight: FontWeight.normal),
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
