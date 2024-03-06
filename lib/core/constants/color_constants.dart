@@ -6,6 +6,7 @@ class ColorConstants {
   static const Color primaryWhite = Color(0xffFFFFFF);
   static const Color lightGrey = Color(0xffFAFAFA);
   static const Color normalRed = Colors.red;
+  static const Color transparent = Colors.transparent;
   static const Color customPink = Color.fromARGB(255, 219, 43, 134);
 
   // Home screen

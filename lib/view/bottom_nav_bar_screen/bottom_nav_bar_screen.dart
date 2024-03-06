@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone_application/core/constants/color_constants.dart';
 import 'package:instagram_clone_application/view/home_screen/home_screen.dart';
+import 'package:instagram_clone_application/view/profile_screen/profile_screen.dart';
 import 'package:instagram_clone_application/view/search_screen/search_screen.dart';
 import 'package:instagram_clone_application/view/select_account_screen/select_account_screen.dart';
 
@@ -21,9 +22,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
     Container(
       color: Colors.blue,
     ),
-    Container(
-      color: Colors.green,
-    ),
+    Profilescreen()
   ];
 
   int selectedIndex = 0;
