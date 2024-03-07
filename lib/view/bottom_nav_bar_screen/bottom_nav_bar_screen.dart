@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone_application/core/constants/color_constants.dart';
+import 'package:instagram_clone_application/view/create_post_screen/create_post_screen.dart';
 import 'package:instagram_clone_application/view/home_screen/home_screen.dart';
 import 'package:instagram_clone_application/view/profile_screen/profile_screen.dart';
 import 'package:instagram_clone_application/view/search_screen/search_screen.dart';
@@ -16,12 +17,8 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
   List<Widget> screesList = [
     HomeScreen(),
     SearchScreen(),
-    Container(
-      color: Colors.white,
-    ),
-    Container(
-      color: Colors.blue,
-    ),
+    Container(color: Colors.white),
+    Container(color: Colors.blue),
     Profilescreen()
   ];
 
@@ -41,7 +38,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SelectAccountScreen(),
+                    builder: (context) => CreatePostScreen(),
                   ));
             }
           },

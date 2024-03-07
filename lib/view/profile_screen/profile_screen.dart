@@ -2,11 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:instagram_clone_application/core/constants/color_constants.dart';
+import 'package:instagram_clone_application/dummy_db.dart';
 import 'package:instagram_clone_application/global_widgets/custom_button.dart';
 import 'package:instagram_clone_application/view/profile_screen/widget/custom_profile_data_widget.dart';
 
-class Profilescreen extends StatelessWidget {
+class Profilescreen extends StatefulWidget {
   const Profilescreen({super.key});
+
+  @override
+  State<Profilescreen> createState() => _ProfilescreenState();
+}
+
+class _ProfilescreenState extends State<Profilescreen> {
+  var currentTabIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -83,10 +91,11 @@ class Profilescreen extends StatelessWidget {
                       height: 4,
                     ),
                     Text(
-                        maxLines: 3,
-                        textAlign: TextAlign.justify,
-                        overflow: TextOverflow.ellipsis,
-                        "Lorem Ipsum is simpl dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
+                      "Lorem Ipsum is simpl dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                      maxLines: 3,
+                      textAlign: TextAlign.justify,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                     SizedBox(
                       height: 16,
                     ),
@@ -184,6 +193,11 @@ class Profilescreen extends StatelessWidget {
                   unselectedLabelColor:
                       ColorConstants.primaryBlack.withOpacity(.3),
                   indicatorSize: TabBarIndicatorSize.tab,
+                  onTap: (index) {
+                    setState(() {
+                      currentTabIndex = index;
+                    });
+                  },
                   tabs: [
                     Tab(
                       icon: Icon(Icons.grid_on_sharp),
@@ -192,21 +206,38 @@ class Profilescreen extends StatelessWidget {
                       icon: Icon(Icons.person_pin_rounded),
                     )
                   ]),
-              Container(
-                height: 400,
-                child: TabBarView(children: [
-                  Container(
-                    height: 200,
-                    width: 200,
-                    color: Colors.red,
-                  ),
-                  Container(
-                    height: 200,
-                    width: 200,
-                    color: Colors.green,
-                  )
-                ]),
-              )
+              currentTabIndex == 0
+                  ? GridView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: DummyDb.postsList.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          mainAxisSpacing: 2,
+                          crossAxisSpacing: 2,
+                          crossAxisCount: 3),
+                      itemBuilder: (context, index) => Container(
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(DummyDb.postsList[index]))),
+                      ),
+                    )
+                  : GridView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: DummyDb.taggedPostsList.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          mainAxisSpacing: 2,
+                          crossAxisSpacing: 2,
+                          crossAxisCount: 3),
+                      itemBuilder: (context, index) => Container(
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(
+                                    DummyDb.taggedPostsList[index]))),
+                      ),
+                    )
             ],
           ),
         ),
